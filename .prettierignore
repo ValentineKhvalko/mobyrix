@@ -1,0 +1,17 @@
+**/dist
+**/.next*
+**/public
+**/out
+**/node_modules
+
+.prettierrc 
+.env
+tailwind.config.js
+postcss.config.js
+next-env.d.ts 
+next.config.js 
+
+.DS_Store
+*.html
+*.json
+*.md

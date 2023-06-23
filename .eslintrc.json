@@ -1,0 +1,62 @@
+{
+  "globals": {
+    "NodeJS": true,
+    "JSX": true
+  },
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "extends": [
+    "eslint:recommended",
+    "plugin:node/recommended",
+    "plugin:@next/next/recommended",
+    "plugin:prettier/recommended",
+    "plugin:@reatom/recommended"
+  ],
+  "plugins": ["@typescript-eslint", "@reatom"],
+  "rules": {
+    "@next/next/no-img-element": "off",
+    "no-duplicate-imports": ["error"],
+    "@next/next/no-document-import-in-page": "off",
+    "no-empty-function": "off",
+    "no-useless-constructor": "off",
+    "@typescript-eslint/no-useless-constructor": ["error"],
+    "node/no-extraneous-import": "off",
+    "node/no-missing-import": 0,
+    "no-unused-vars": "off",
+    "node/no-unsupported-features/es-syntax": [
+      "error",
+      {
+        "version": "14.17.3",
+        "ignores": ["modules"]
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "ignoreRestSiblings": true
+      }
+    ],
+    "curly": ["error"]
+  },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": "tsconfig.json"
+      }
+    }
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js"],
+      "rules": {
+        "no-dupe-class-members": "off",
+        "node/no-unpublished-require": "off"
+      }
+    }
+  ]
+}
+
