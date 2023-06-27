@@ -14,6 +14,8 @@
     "@reatom/framework": "^3.4.6",
     "@reatom/npm-react": "^3.3.3",
     "autoprefixer": "10.4.14",
+    "classnames": "^2.3.2",
+    "ky-universal": "^0.11.0",
     "next": "13.4.7",
     "postcss": "8.4.24",
     "react": "18.2.0",
