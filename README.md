@@ -1,34 +1,23 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Для запуска приложения используйте _dev_ `npm run dev` мод
+  Приложение запускается на 3000 порту [http://localhost:3000](http://localhost:3000).
 
-## Getting Started
+<sub>Если вы видите этот текст, значит мне все ещё не удалось подружить [reatom](https://www.reatom.dev/) и _next v13_</sub>
 
-First, run the development server:
+### В приложении пристутствует 3 страницы:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- Market (он же main):
+  Здесь пользователь может отслеживать курс 100 основных криптовалют, и осзнакомиться с ключевой информацией о них.
+  <sub>*обновление данных происходит каждые 2,5 секунды</sub>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Trade:
+  Пользователь может обменять одну криптовалюту на другую. 
+  Здесь сразу отображается сколько монет пользователь получит после обмена.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+  #### Обмен может быть заблокирован: 
+  - Пользователь не ввел никакую сумму для обмена.
+  - Введёная сумма, либо желаемая сумма привышают капитализацию моенеты.
+  - На балансе нет достаточной суммы (как пополнить баланс читай ниже).
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Profile: 
+  Здесь можно добавить себе любое количество монет, не привышающих капитализацию, из представленых криптовалют. 
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
