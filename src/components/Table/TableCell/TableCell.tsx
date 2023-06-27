@@ -1,6 +1,6 @@
-import React, { FC, PropsWithChildren } from 'react';
+import React, { PropsWithChildren } from 'react';
 
-export type TableCellProps = {
+type TableCellProps = {
   component?: 'th' | 'td';
   align?: 'center' | 'inherit' | 'justify' | 'left' | 'right';
   width?: number | string;
@@ -8,14 +8,7 @@ export type TableCellProps = {
   className?: string;
 };
 
-const TableCell: FC<PropsWithChildren<TableCellProps>> = ({
-  className,
-  align,
-  component,
-  colSpan,
-  width,
-  children,
-}) => {
+function TableCell({ className, align, component, colSpan, width, children }: PropsWithChildren<TableCellProps>) {
   const Tag = component || 'td';
 
   return (
@@ -27,6 +20,6 @@ const TableCell: FC<PropsWithChildren<TableCellProps>> = ({
       {children}
     </Tag>
   );
-};
+}
 
 export default TableCell;

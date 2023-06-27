@@ -1,12 +1,15 @@
 'use client';
 
-import ConvertIcon from '../../assets/convert.svg';
-import LoadingIcon from '../../assets/loading.svg';
-import { CurrencyField } from './components/CurrencyField';
+import React from 'react';
 import classNames from 'classnames';
-import useConvertAssets from './components/hooks/useConvertAssets';
 
-export default function Trade() {
+import convertIcon from '../../assets/convert.svg';
+import loadingIcon from '../../assets/loading.svg';
+import CurrencyField from '../../components/CurrencyField';
+import { useConvertAssets } from '../../hooks/useConvertAssets';
+import Image from 'next/image';
+
+function Trade() {
   const { assets, values, select, change, convert, loading, disabled, swap } = useConvertAssets();
 
   return (
@@ -22,7 +25,7 @@ export default function Trade() {
         onClick={swap}
         className="flex justify-center items-center w-12 h-12 rounded-full my-4 bg-gray-200 hover:bg-gray-100 cursor-pointer"
       >
-        <ConvertIcon width={25} height={25} />
+        <Image src={convertIcon} width={25} height={25} alt="convert-icon" />
       </div>
       <CurrencyField value={values.to} title="to:" readOnly currency={assets.to} onSelect={select.to} />
       <button
@@ -32,7 +35,7 @@ export default function Trade() {
       >
         {loading && (
           <div className="absolute top-1/2 left-1/2 -translate-y-2/4 -translate-x-1/2">
-            <LoadingIcon width={24} height={24} className="animate-spin " />
+            <Image src={loadingIcon} width={24} height={24} alt="loading-icon" />
           </div>
         )}
         <span className={classNames('font-medium', { invisible: loading })}>
@@ -42,3 +45,5 @@ export default function Trade() {
     </div>
   );
 }
+
+export default Trade;

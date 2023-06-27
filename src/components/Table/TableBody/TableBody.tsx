@@ -1,5 +1,7 @@
-import React, { FC, PropsWithChildren } from 'react';
+import React, { PropsWithChildren } from 'react';
 
-const TableBody: FC<PropsWithChildren> = ({ children }) => <tbody>{children}</tbody>;
+function TableBody({ children }: PropsWithChildren) {
+  return <tbody>{children}</tbody>;
+}
 
 export default TableBody;

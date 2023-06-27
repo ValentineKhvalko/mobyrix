@@ -1,18 +1,16 @@
-'use client';
-
-import React, { FC } from 'react';
+import React from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 import { useAtom } from '@reatom/npm-react';
-import classNames from 'classnames';
 import { usePathname } from 'next/navigation';
+import classNames from 'classnames';
 
 import { baseCurrencisAtom } from './model';
-
 import { LOGO_SRC, baseCurrencis } from './constants';
-import Link from 'next/link';
 import { Routes } from '@/constants';
-import ProfileIcon from '../../assets/profile.svg';
+import profileIcon from '../../assets/profile.svg';
 
-export const Header: FC = () => {
+function Header() {
   const pathname = usePathname();
   const [currency, setCurrency] = useAtom(baseCurrencisAtom);
 
@@ -66,10 +64,12 @@ export const Header: FC = () => {
           ))}
         </div>
         <Link href={Routes.profile} className="ml-8 flex items-center cursor-pointer text-lg">
-          <ProfileIcon width="16" heigth="16" className="mr-2" />
+          <Image src={profileIcon} width="16" height="16" className="mr-2" alt="profile-icon" />
           Profile
         </Link>
       </div>
     </div>
   );
-};
+}
+
+export default Header;

@@ -1,14 +1,14 @@
 'use client';
 
+import React, { useEffect } from 'react';
 import { useAction, useAtom } from '@reatom/npm-react';
 import classNames from 'classnames';
 
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@/components/Table';
 import { fetchAssetsAction, loopedFetchAssetsAction } from '@/model';
 import { PriceField } from '@/components/PriceField';
-import { useEffect } from 'react';
 
-export default function Market() {
+function Market() {
   const [assets] = useAtom(fetchAssetsAction.dataAtom);
   const loopedFetchAssets = useAction(loopedFetchAssetsAction);
 
@@ -63,3 +63,5 @@ export default function Market() {
     </div>
   );
 }
+
+export default Market;

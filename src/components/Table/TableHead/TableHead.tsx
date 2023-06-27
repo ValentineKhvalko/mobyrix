@@ -1,5 +1,7 @@
-import React, { FC, PropsWithChildren } from 'react';
+import React, { PropsWithChildren } from 'react';
 
-const TableHead: FC<PropsWithChildren> = ({ children }) => <thead>{children}</thead>;
+function TableHead({ children }: PropsWithChildren) {
+  return <thead>{children}</thead>;
+}
 
 export default TableHead;

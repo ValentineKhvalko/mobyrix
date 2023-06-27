@@ -9,7 +9,7 @@ const DEFAULT_ASSETS_NAMES = {
   to: 'USDT',
 };
 
-const useConvertAssets = () => {
+export function useConvertAssets() {
   const [assetsData] = useAtom(fetchAssetsAction.dataAtom);
   const [status] = useAtom(fetchAssetsAction.statusesAtom);
   const [profileData, setProfileData] = useAtom(profileDataAtom);
@@ -92,6 +92,4 @@ const useConvertAssets = () => {
       (!!toValue && toValue > assets.to.marketCapUsd),
     loading: status.isPending,
   };
-};
-
-export default useConvertAssets;
+}

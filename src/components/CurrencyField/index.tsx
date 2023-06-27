@@ -1,9 +1,9 @@
-import { FC, useRef } from 'react';
+import { useRef } from 'react';
+// import { useAtom } from '@reatom/npm-react';
 
 import { CurrencySelect } from '../CurrencySelect';
 import { Asset } from '@/types';
-import { useAtom } from '@reatom/npm-react';
-import { profileDataAtom } from '@/model';
+// import { profileDataAtom } from '@/model';
 
 type Props = {
   title: string;
@@ -14,9 +14,9 @@ type Props = {
   readOnly?: boolean;
 };
 
-const CurrencyField: FC<Props> = ({ title, value, currency, readOnly, onSelect, onChange }) => {
+function CurrencyField({ title, value, currency, readOnly, onSelect, onChange }: Props) {
   const ref = useRef(null);
-  const [profileData] = useAtom(profileDataAtom);
+  // const [profileData] = useAtom(profileDataAtom);
 
   return (
     <>
@@ -24,7 +24,7 @@ const CurrencyField: FC<Props> = ({ title, value, currency, readOnly, onSelect, 
         <div className="flex justify-between mb-4">
           {title}
           <div>
-            <div>Balance: {(currency && profileData[currency.symbol]) || 0}</div>
+            {/* <div>Balance: {(currency && profileData[currency.symbol]) || 0}</div> */}
             <div>
               Max: <span className="text-xs text-gray-500">{currency ? currency.marketCapUsdShort : 0}</span>
             </div>
@@ -45,6 +45,6 @@ const CurrencyField: FC<Props> = ({ title, value, currency, readOnly, onSelect, 
       </div>
     </>
   );
-};
+}
 
 export default CurrencyField;

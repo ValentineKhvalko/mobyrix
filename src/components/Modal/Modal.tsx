@@ -1,13 +1,14 @@
-import React, { FC, PropsWithChildren } from 'react';
+import React, { PropsWithChildren } from 'react';
+import Image from 'next/image';
 
-import CrossIcon from '../../assets/cross.svg';
+import crossIcon from '../../assets/cross.svg';
 
 type Props = {
   isOpen: boolean;
   onClose: () => void;
 };
 
-const Modal: FC<PropsWithChildren<Props>> = ({ isOpen, onClose, children }) => {
+function Modal({ isOpen, onClose, children }: PropsWithChildren<Props>) {
   if (!isOpen) {
     return null;
   }
@@ -19,12 +20,12 @@ const Modal: FC<PropsWithChildren<Props>> = ({ isOpen, onClose, children }) => {
     >
       <div className="w-96 h-96 bg-white relative rounded-lg" onClick={(e) => e.stopPropagation()}>
         <div className="absolute top-1 right-1 cursor-pointer" onClick={onClose}>
-          <CrossIcon width={25} height={25} className="hover:fill-yellow-400" />
+          <Image src={crossIcon} width={25} height={25} className="hover:fill-yellow-400" alt="cross-icon" />
         </div>
         {children}
       </div>
     </div>
   );
-};
+}
 
 export default Modal;

@@ -1,11 +1,11 @@
-import React, { FC, PropsWithChildren } from 'react';
+import React, { PropsWithChildren } from 'react';
 
 export type TableRowProps = {
   className?: string;
 };
 
-const TableRow: FC<PropsWithChildren<TableRowProps>> = ({ children, className }) => {
+function TableRow({ children, className }: PropsWithChildren<TableRowProps>) {
   return <tr className={className}>{children}</tr>;
-};
+}
 
 export default TableRow;

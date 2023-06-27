@@ -1,4 +1,3 @@
-import { FC } from 'react';
 import { useAtom } from '@reatom/npm-react';
 
 import { Modal } from '@/components/Modal';
@@ -11,7 +10,7 @@ type Props = {
   readonly?: boolean;
 };
 
-const CurrencySelect: FC<Props> = ({ currency, onSelect }) => {
+function CurrencySelect({ currency, onSelect }: Props) {
   const [isOpen, setIsOpen] = useAtom(false);
   const [assets] = useAtom(fetchAssetsAction.dataAtom);
 
@@ -55,6 +54,6 @@ const CurrencySelect: FC<Props> = ({ currency, onSelect }) => {
       </Modal>
     </>
   );
-};
+}
 
 export default CurrencySelect;
