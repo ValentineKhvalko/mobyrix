@@ -17,27 +17,26 @@ export default function Market() {
   }, []);
 
   return (
-    <div>
-      <div className="mx-10">
+    <div className="flex justify-center">
+      <div className="content mx-10 flex-grow">
         <Table className="w-full">
           <TableHead>
             <TableRow>
               <TableCell className="w-1/5">Name</TableCell>
               <TableCell className="w-1/5">Price</TableCell>
-              <TableCell className="w-2/12" align="center">
+              <TableCell className="w-1/5" align="center">
                 24h changes
               </TableCell>
-              <TableCell className="w-2/12" align="center">
+              <TableCell className="w-1/5" align="center">
                 24h volume
               </TableCell>
-              <TableCell className="w-1/4" align="center">
+              <TableCell className="w-1/5" align="center">
                 capitalization
               </TableCell>
-              <TableCell />
             </TableRow>
           </TableHead>
           <TableBody>
-            {assets?.map(({ symbol, name, priceUsd, changePercent24Hr, volumeUsd24Hr, marketCapUsd, id }) => (
+            {assets?.map(({ symbol, name, priceUsd, changePercent24Hr, volumeUsd24Hr, marketCapUsdShort, id }) => (
               <TableRow className="h-11" key={id}>
                 <TableCell className="text-ellipsis overflow-hidden font-extralight text-xs">
                   <span className="font-medium text-lg">{symbol}</span> {name}
@@ -55,10 +54,7 @@ export default function Market() {
                   {changePercent24Hr}%
                 </TableCell>
                 <TableCell align="center">{volumeUsd24Hr}</TableCell>
-                <TableCell align="center">{marketCapUsd}</TableCell>
-                <TableCell width={'10%'} align="right">
-                  Trade
-                </TableCell>
+                <TableCell align="center">{marketCapUsdShort}</TableCell>
               </TableRow>
             ))}
           </TableBody>

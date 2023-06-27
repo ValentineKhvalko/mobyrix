@@ -22,9 +22,10 @@ export const shortenLongNumber = (value: number) => {
 export const formatAssets = (assets: AssetResponse[]): Asset[] => {
   return assets.map((value) => ({
     ...value,
+    marketCapUsd: Number(value.marketCapUsd),
     priceUsd: Number(Number(value.priceUsd).toFixed(2)),
     changePercent24Hr: Number(Number(value.changePercent24Hr).toFixed(2)),
     volumeUsd24Hr: shortenLongNumber(Number(value.volumeUsd24Hr)),
-    marketCapUsd: shortenLongNumber(Number(value.marketCapUsd)),
+    marketCapUsdShort: shortenLongNumber(Number(value.marketCapUsd)),
   }));
 };

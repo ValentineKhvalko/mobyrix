@@ -26,6 +26,7 @@ const CurrencySelect: FC<Props> = ({ currency, onSelect }) => {
         onClick={() => {
           setIsOpen(true);
         }}
+        className="px-3 py-1 font-medium text-lg rounded-3xl bg-white cursor-pointer hover:text-yellow-400"
       >
         {currency?.symbol}
       </div>
@@ -36,7 +37,7 @@ const CurrencySelect: FC<Props> = ({ currency, onSelect }) => {
         }}
       >
         <div className="flex flex-col h-full">
-          <div className="text-center font-medium mb-4">Select currency</div>
+          <div className="text-center font-medium my-4 text-lg">Select currency</div>
           <div className="flex-grow px-4 mb-4 overflow-y-auto">
             {assets?.map((asset) => (
               <div
@@ -44,7 +45,7 @@ const CurrencySelect: FC<Props> = ({ currency, onSelect }) => {
                 onClick={() => {
                   handleSelect(asset);
                 }}
-                className="text-ellipsis overflow-hidden font-extralight text-xs my-1 cursor-pointer"
+                className="text-ellipsis overflow-hidden font-extralight text-xs my-1 cursor-pointer hover:text-yellow-400"
               >
                 <span className="font-medium text-lg">{asset.symbol}</span> {asset.name}
               </div>

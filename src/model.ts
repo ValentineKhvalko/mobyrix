@@ -1,4 +1,4 @@
-import { onConnect, onDisconnect, reatomAsync, withDataAtom, withStatusesAtom } from '@reatom/framework';
+import { atom, onConnect, onDisconnect, reatomAsync, withDataAtom, withStatusesAtom } from '@reatom/framework';
 import { getAssetsRequest } from './api/requests/assets';
 import { formatAssets } from './utils';
 
@@ -32,3 +32,5 @@ onDisconnect(fetchAssetsAction.dataAtom, () => {
     timerId = null;
   }
 });
+
+export const profileDataAtom = atom<Record<string, number>>({}, 'profileDataAtom');

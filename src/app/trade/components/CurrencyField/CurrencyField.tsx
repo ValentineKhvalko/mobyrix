@@ -1,29 +1,44 @@
-import { FC } from 'react';
+import { FC, useRef } from 'react';
 
 import { CurrencySelect } from '../CurrencySelect';
 import { Asset } from '@/types';
+import { useAtom } from '@reatom/npm-react';
+import { profileDataAtom } from '@/model';
 
 type Props = {
   title: string;
+  value?: number;
   currency?: Asset;
   onSelect: (currency: Asset) => void;
+  onChange?: (value: string) => void;
   readOnly?: boolean;
 };
 
-const CurrencyField: FC<Props> = ({ title, currency, readOnly, onSelect }) => {
+const CurrencyField: FC<Props> = ({ title, value, currency, readOnly, onSelect, onChange }) => {
+  const ref = useRef(null);
+  const [profileData] = useAtom(profileDataAtom);
+
   return (
     <>
       <div className="p-4 w-96 rounded-lg bg-gray-200">
-        <div className="flex justify-between">
+        <div className="flex justify-between mb-4">
           {title}
-          <div>balance:</div>
+          <div>
+            <div>Balance: {(currency && profileData[currency.symbol]) || 0}</div>
+            <div>
+              Max: <span className="text-xs text-gray-500">{currency ? currency.marketCapUsdShort : 0}</span>
+            </div>
+          </div>
         </div>
         <div className="flex justify-between">
           <input
+            ref={ref}
             type="number"
             readOnly={readOnly}
-            className="bg-transparent outline-none appearance-none"
+            className="font-medium text-xl bg-transparent outline-none appearance-none flex-grow mr-2"
             placeholder="0.00"
+            onChange={onChange ? (e) => onChange(e.target.value) : undefined}
+            value={value ? String(value) : 0}
           />
           <CurrencySelect currency={currency} onSelect={onSelect} />
         </div>

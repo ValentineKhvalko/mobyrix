@@ -1,6 +1,7 @@
 export enum Routes {
   market = '/',
   trade = '/trade',
+  profile = '/profile',
 }
 
 // export const API_KEY = '0961478e42befbebc379506027afd646'

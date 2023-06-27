@@ -10,6 +10,7 @@ import { baseCurrencisAtom } from './model';
 import { LOGO_SRC, baseCurrencis } from './constants';
 import Link from 'next/link';
 import { Routes } from '@/constants';
+import ProfileIcon from '../../assets/profile.svg';
 
 export const Header: FC = () => {
   const pathname = usePathname();
@@ -49,20 +50,25 @@ export const Header: FC = () => {
       </div>
 
       <div className="flex">
-        {Object.values(baseCurrencis).map((value) => (
-          <div
-            key={value.name}
-            className={classNames('px-1 cursor-pointer transition-colors', {
-              'text-amber-700': value.name === currency.name,
-            })}
-            onClick={() => {
-              setCurrency(value);
-            }}
-          >
-            {value.name}
-          </div>
-          // currency.name !== value.name ? <div className='px-1'>{value.name}</div> : undefined
-        ))}
+        <div className="flex">
+          {Object.values(baseCurrencis).map((value) => (
+            <div
+              key={value.name}
+              className={classNames('px-1 cursor-pointer transition-colors', {
+                'text-amber-700': value.name === currency.name,
+              })}
+              onClick={() => {
+                setCurrency(value);
+              }}
+            >
+              {value.name}
+            </div>
+          ))}
+        </div>
+        <Link href={Routes.profile} className="ml-8 flex items-center cursor-pointer text-lg">
+          <ProfileIcon width="16" heigth="16" className="mr-2" />
+          Profile
+        </Link>
       </div>
     </div>
   );
