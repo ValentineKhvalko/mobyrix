@@ -20,7 +20,7 @@ function Modal({ isOpen, onClose, children }: PropsWithChildren<Props>) {
     >
       <div className="w-96 h-96 bg-white relative rounded-lg" onClick={(e) => e.stopPropagation()}>
         <div className="absolute top-1 right-1 cursor-pointer" onClick={onClose}>
-          <Image src={crossIcon} width={25} height={25} className="hover:fill-yellow-400" alt="cross-icon" />
+          <Image src={crossIcon} width={25} height={25} alt="cross-icon" />
         </div>
         {children}
       </div>

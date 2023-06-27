@@ -89,6 +89,7 @@ export function useConvertAssets() {
       !fromValue ||
       fromValue > assets.from.marketCapUsd ||
       profileData[assets.from.symbol] < fromValue ||
+      assets.from.name === assets.to.name ||
       (!!toValue && toValue > assets.to.marketCapUsd),
     loading: status.isPending,
   };

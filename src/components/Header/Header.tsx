@@ -5,55 +5,50 @@ import { useAtom } from '@reatom/npm-react';
 import { usePathname } from 'next/navigation';
 import classNames from 'classnames';
 
-import { baseCurrencisAtom } from './model';
-import { LOGO_SRC, baseCurrencis } from './constants';
+import { baseCurrenciesAtom } from './model';
+import { LOGO_SRC, RoutesData, baseCurrencies } from './constants';
 import { Routes } from '@/constants';
 import profileIcon from '../../assets/profile.svg';
 
 function Header() {
   const pathname = usePathname();
-  const [currency, setCurrency] = useAtom(baseCurrencisAtom);
+  const [currency, setCurrency] = useAtom(baseCurrenciesAtom);
 
   return (
     <div className="flex p-3 justify-between items-center">
       <div className="flex items-center">
         <div className="flex items-center">
           <img className="pr-2" src={LOGO_SRC} />
-          <h1 className="font-medium text-lg">MOBYRIX</h1>
+          <h1 className="font-medium text-xl">MOBYRIX</h1>
         </div>
         <nav className="ml-20">
           <ul className="flex items-center text-sm uppercase">
-            <li>
-              <Link
-                className={classNames('px-3 py-2 border-b-4 border-transparent transition-all hover:border-amber-100', {
-                  ' border-b-amber-500': pathname === Routes.market,
-                })}
-                href={Routes.market}
-              >
-                Market
-              </Link>
-            </li>
-            <li>
-              <Link
-                className={classNames('px-3 py-2 border-b-4 border-transparent transition-all hover:border-amber-100', {
-                  'border-b-amber-500': pathname === Routes.trade,
-                })}
-                href={Routes.trade}
-              >
-                Trade
-              </Link>
-            </li>
+            {RoutesData.map((route) => (
+              <li>
+                <Link
+                  className={classNames(
+                    'px-3 py-2 border-b-4 border-transparent transition-all font-medium hover:border-yellow-200',
+                    {
+                      ' border-b-yellow-400': pathname === route.href,
+                    }
+                  )}
+                  href={route.href}
+                >
+                  {route.name}
+                </Link>
+              </li>
+            ))}
           </ul>
         </nav>
       </div>
 
       <div className="flex">
         <div className="flex">
-          {Object.values(baseCurrencis).map((value) => (
+          {Object.values(baseCurrencies).map((value) => (
             <div
               key={value.name}
               className={classNames('px-1 cursor-pointer transition-colors', {
-                'text-amber-700': value.name === currency.name,
+                'text-yellow-400': value.name === currency.name,
               })}
               onClick={() => {
                 setCurrency(value);

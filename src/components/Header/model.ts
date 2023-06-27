@@ -1,5 +1,5 @@
 import { atom } from '@reatom/framework';
-import { baseCurrencis } from './constants';
-import { BaseCurrencis } from './types';
+import { baseCurrencies } from './constants';
+import { BaseCurrencies } from './types';
 
-export const baseCurrencisAtom = atom<BaseCurrencis>(baseCurrencis.USD, 'baseCurrencisAtom');
+export const baseCurrenciesAtom = atom<BaseCurrencies>(baseCurrencies.USD, 'baseCurrenciesAtom');

@@ -1,9 +1,9 @@
 import { useRef } from 'react';
-// import { useAtom } from '@reatom/npm-react';
+import { useAtom } from '@reatom/npm-react';
 
 import { CurrencySelect } from '../CurrencySelect';
 import { Asset } from '@/types';
-// import { profileDataAtom } from '@/model';
+import { profileDataAtom } from '@/model';
 
 type Props = {
   title: string;
@@ -16,7 +16,7 @@ type Props = {
 
 function CurrencyField({ title, value, currency, readOnly, onSelect, onChange }: Props) {
   const ref = useRef(null);
-  // const [profileData] = useAtom(profileDataAtom);
+  const [profileData] = useAtom(profileDataAtom);
 
   return (
     <>
@@ -24,7 +24,7 @@ function CurrencyField({ title, value, currency, readOnly, onSelect, onChange }:
         <div className="flex justify-between mb-4">
           {title}
           <div>
-            {/* <div>Balance: {(currency && profileData[currency.symbol]) || 0}</div> */}
+            <div>Balance: {(currency && profileData[currency.symbol]) || 0}</div>
             <div>
               Max: <span className="text-xs text-gray-500">{currency ? currency.marketCapUsdShort : 0}</span>
             </div>
