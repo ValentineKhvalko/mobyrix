@@ -58,7 +58,7 @@ export function useConvertAssets() {
     setProfileData({
       ...profileData,
       [assets.from!.symbol]: Number((profileData[assets.from!.symbol] - fromValue!).toFixed(3)),
-      [assets.to!.symbol]: Number((profileData[assets.to!.symbol] + toValue!).toFixed(3)),
+      [assets.to!.symbol]: Number(((profileData[assets.to!.symbol] || 0) + toValue!).toFixed(3)),
     });
 
     setFromValue(undefined);
