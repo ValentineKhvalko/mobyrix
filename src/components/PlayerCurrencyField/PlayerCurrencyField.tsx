@@ -1,18 +1,20 @@
-import { useAtom } from '@reatom/npm-react';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
-import { profileDataAtom } from '@/model';
 import { TableCell, TableRow } from '@/components/Table';
 import { Asset } from '@/types';
+import { useAppSelector } from '@/hooks/useAppSelector';
+import { useAppDispatch } from '@/hooks/useAppDispatch';
+import { selectProfileData, update } from '@/features/profileData/profileDataSlice';
 
 type Props = {
   asset: Asset;
 };
 
 function PlayerCurrencyField({ asset }: Props) {
-  const [profileData, setProfileData] = useAtom(profileDataAtom);
-  const [readOnly, setReadOnly] = useAtom(true);
-  const [inputValue, setInputValue] = useAtom<number>(profileData?.[asset.symbol] || 0);
+  const profileData = useAppSelector(selectProfileData);
+  const dispatch = useAppDispatch();
+  const [readOnly, setReadOnly] = useState(true);
+  const [inputValue, setInputValue] = useState<number>(profileData?.[asset.symbol] || 0);
   const ref = useRef<HTMLInputElement>(null);
 
   const changeProfileValue = () => {
@@ -20,10 +22,11 @@ function PlayerCurrencyField({ asset }: Props) {
       setReadOnly(false);
       ref.current?.focus();
     } else {
-      setProfileData({
-        ...profileData,
-        [asset.symbol]: inputValue,
-      });
+      dispatch(
+        update({
+          [asset.symbol]: inputValue,
+        })
+      );
       setReadOnly(true);
     }
   };

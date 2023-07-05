@@ -1,8 +1,9 @@
-import { useAtom } from '@reatom/npm-react';
+import { useState } from 'react';
 
 import { Modal } from '@/components/Modal';
-import { fetchAssetsAction } from '@/model';
 import { Asset } from '@/types';
+import { useAppSelector } from '@/hooks/useAppSelector';
+import { selectAssets } from '@/features/assets/assetsSlice';
 
 type Props = {
   currency?: Asset;
@@ -11,8 +12,8 @@ type Props = {
 };
 
 function CurrencySelect({ currency, onSelect }: Props) {
-  const [isOpen, setIsOpen] = useAtom(false);
-  const [assets] = useAtom(fetchAssetsAction.dataAtom);
+  const [isOpen, setIsOpen] = useState(false);
+  const assets = useAppSelector(selectAssets);
 
   const handleSelect = (value: Asset) => {
     onSelect(value);

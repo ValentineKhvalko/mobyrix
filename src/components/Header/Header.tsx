@@ -1,18 +1,21 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useAtom } from '@reatom/npm-react';
 import { usePathname } from 'next/navigation';
 import classNames from 'classnames';
 
-import { baseCurrenciesAtom } from './model';
-import { LOGO_SRC, RoutesData, baseCurrencies } from './constants';
+import { LOGO_SRC, RoutesData } from './constants';
 import { Routes } from '@/constants';
 import profileIcon from '../../assets/profile.svg';
+import { useAppSelector } from '@/hooks/useAppSelector';
+import { change, selectbaseCurrency } from '@/features/baseCurrencies/baseCurrenciesSlice';
+import { useAppDispatch } from '@/hooks/useAppDispatch';
+import { baseCurrencies } from '@/features/baseCurrencies/constants';
 
 function Header() {
   const pathname = usePathname();
-  const [currency, setCurrency] = useAtom(baseCurrenciesAtom);
+  const currency = useAppSelector(selectbaseCurrency);
+  const dispatch = useAppDispatch();
 
   return (
     <div className="flex p-3 justify-between items-center">
@@ -24,7 +27,7 @@ function Header() {
         <nav className="ml-20">
           <ul className="flex items-center text-sm uppercase">
             {RoutesData.map((route) => (
-              <li>
+              <li key={route.name}>
                 <Link
                   className={classNames(
                     'px-3 py-2 border-b-4 border-transparent transition-all font-medium hover:border-yellow-200',
@@ -51,7 +54,7 @@ function Header() {
                 'text-yellow-400': value.name === currency.name,
               })}
               onClick={() => {
-                setCurrency(value);
+                dispatch(change(value));
               }}
             >
               {value.name}

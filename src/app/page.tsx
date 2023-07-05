@@ -1,20 +1,37 @@
 'use client';
 
 import React, { useEffect } from 'react';
-import { useAction, useAtom } from '@reatom/npm-react';
 import classNames from 'classnames';
 
 import { Table, TableBody, TableCell, TableHead, TableRow } from '@/components/Table';
-import { fetchAssetsAction, loopedFetchAssetsAction } from '@/model';
 import { PriceField } from '@/components/PriceField';
+import { useAppSelector } from '@/hooks/useAppSelector';
+import { selectAssets } from '@/features/assets/assetsSlice';
+import { useAppDispatch } from '@/hooks/useAppDispatch';
+import { fetchAssets } from '@/features/assets/fetchAssets';
+
+let timerId: NodeJS.Timeout | null = null;
 
 function Market() {
-  const [assets] = useAtom(fetchAssetsAction.dataAtom);
-  const loopedFetchAssets = useAction(loopedFetchAssetsAction);
+  const assets = useAppSelector(selectAssets);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    loopedFetchAssets();
-  }, []);
+    if (!assets) {
+      dispatch(fetchAssets());
+    } else {
+      timerId = setTimeout(() => {
+        dispatch(fetchAssets());
+      }, 2500);
+    }
+
+    return () => {
+      if (timerId) {
+        clearTimeout(timerId);
+        timerId = null;
+      }
+    };
+  }, [assets]);
 
   return (
     <div className="flex justify-center">

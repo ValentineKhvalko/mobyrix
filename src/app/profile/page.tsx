@@ -1,14 +1,23 @@
 'use client';
 
-import { useAtom } from '@reatom/npm-react';
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import { fetchAssetsAction } from '@/model';
 import { Table, TableBody } from '@/components/Table';
 import PlayerCurrencyField from '@/components/PlayerCurrencyField/PlayerCurrencyField';
+import { useAppSelector } from '@/hooks/useAppSelector';
+import { selectAssets } from '@/features/assets/assetsSlice';
+import { useAppDispatch } from '@/hooks/useAppDispatch';
+import { fetchAssets } from '@/features/assets/fetchAssets';
 
 function Profile() {
-  const [assets] = useAtom(fetchAssetsAction.dataAtom);
+  const assets = useAppSelector(selectAssets);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (assets) {
+      dispatch(fetchAssets());
+    }
+  }, []);
 
   return (
     <div className="flex justify-center">

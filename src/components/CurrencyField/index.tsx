@@ -1,9 +1,9 @@
 import { useRef } from 'react';
-import { useAtom } from '@reatom/npm-react';
 
 import { CurrencySelect } from '../CurrencySelect';
 import { Asset } from '@/types';
-import { profileDataAtom } from '@/model';
+import { selectProfileData } from '@/features/profileData/profileDataSlice';
+import { useAppSelector } from '@/hooks/useAppSelector';
 
 type Props = {
   title: string;
@@ -16,7 +16,7 @@ type Props = {
 
 function CurrencyField({ title, value, currency, readOnly, onSelect, onChange }: Props) {
   const ref = useRef(null);
-  const [profileData] = useAtom(profileDataAtom);
+  const profileData = useAppSelector(selectProfileData);
 
   return (
     <>

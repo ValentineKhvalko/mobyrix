@@ -9,10 +9,9 @@
     "eslint:recommended",
     "plugin:node/recommended",
     "plugin:@next/next/recommended",
-    "plugin:prettier/recommended",
-    "plugin:@reatom/recommended"
+    "plugin:prettier/recommended"
   ],
-  "plugins": ["@typescript-eslint", "@reatom"],
+  "plugins": ["@typescript-eslint"],
   "rules": {
     "@next/next/no-img-element": "off",
     "no-duplicate-imports": ["error"],

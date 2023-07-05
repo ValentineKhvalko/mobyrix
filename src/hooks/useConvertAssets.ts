@@ -1,8 +1,11 @@
-import { useEffect } from 'react';
-import { useAtom } from '@reatom/npm-react';
+import { useEffect, useState } from 'react';
 
-import { fetchAssetsAction, profileDataAtom } from '@/model';
 import { Asset } from '@/types';
+import { useAppSelector } from './useAppSelector';
+import { selectProfileData, update } from '@/features/profileData/profileDataSlice';
+import { useAppDispatch } from './useAppDispatch';
+import { selectAssets, selectAssetsStatus } from '@/features/assets/assetsSlice';
+import { fetchAssets } from '@/features/assets/fetchAssets';
 
 const DEFAULT_ASSETS_NAMES = {
   from: 'BTC',
@@ -10,13 +13,20 @@ const DEFAULT_ASSETS_NAMES = {
 };
 
 export function useConvertAssets() {
-  const [assetsData] = useAtom(fetchAssetsAction.dataAtom);
-  const [status] = useAtom(fetchAssetsAction.statusesAtom);
-  const [profileData, setProfileData] = useAtom(profileDataAtom);
+  const assetsData = useAppSelector(selectAssets);
+  const status = useAppSelector(selectAssetsStatus);
+  const profileData = useAppSelector(selectProfileData);
+  const dispatch = useAppDispatch();
 
-  const [assets, setAssets] = useAtom<{ from?: Asset; to?: Asset }>({ from: undefined, to: undefined });
-  const [fromValue, setFromValue] = useAtom<number | undefined>(undefined);
-  const [toValue, setToValue] = useAtom<number | undefined>(undefined);
+  const [assets, setAssets] = useState<{ from?: Asset; to?: Asset }>({ from: undefined, to: undefined });
+  const [fromValue, setFromValue] = useState<number | undefined>(undefined);
+  const [toValue, setToValue] = useState<number | undefined>(undefined);
+
+  useEffect(() => {
+    if (assets) {
+      dispatch(fetchAssets());
+    }
+  }, []);
 
   useEffect(() => {
     if (assetsData) {
@@ -25,7 +35,7 @@ export function useConvertAssets() {
         to: assetsData.find((asset) => asset.symbol === DEFAULT_ASSETS_NAMES.to),
       });
     }
-  }, [status.isFulfilled]);
+  }, [assetsData]);
 
   const select = (from: 'from' | 'to') => (asset: Asset) => {
     if (fromValue) {
@@ -55,12 +65,12 @@ export function useConvertAssets() {
   };
 
   const convert = () => {
-    setProfileData({
-      ...profileData,
-      [assets.from!.symbol]: Number((profileData[assets.from!.symbol] - fromValue!).toFixed(3)),
-      [assets.to!.symbol]: Number(((profileData[assets.to!.symbol] || 0) + toValue!).toFixed(3)),
-    });
-
+    dispatch(
+      update({
+        [assets.from!.symbol]: Number((profileData[assets.from!.symbol] - fromValue!).toFixed(3)),
+        [assets.to!.symbol]: Number(((profileData[assets.to!.symbol] || 0) + toValue!).toFixed(3)),
+      })
+    );
     setFromValue(undefined);
     setToValue(undefined);
   };
@@ -88,9 +98,9 @@ export function useConvertAssets() {
       !assets.to ||
       !fromValue ||
       fromValue > assets.from.marketCapUsd ||
-      profileData[assets.from.symbol] < fromValue ||
+      (profileData[assets.from.symbol] || 0) < Number(fromValue) ||
       assets.from.name === assets.to.name ||
       (!!toValue && toValue > assets.to.marketCapUsd),
-    loading: status.isPending,
+    loading: status === 'loading',
   };
 }

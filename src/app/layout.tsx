@@ -1,24 +1,21 @@
 'use client';
 
 import React from 'react';
-import { reatomContext } from '@reatom/npm-react';
-import { connectLogger, createCtx } from '@reatom/framework';
+import { Provider } from 'react-redux';
 
 import '../../styles/globals.css';
 import { Header } from '@/components/Header';
-
-const ctx = createCtx();
-connectLogger(ctx);
+import { store } from '@/store';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <reatomContext.Provider value={ctx}>
+    <Provider store={store}>
       <html lang="en">
         <body className="h-screen flex flex-col">
           <Header />
           {children}
         </body>
       </html>
-    </reatomContext.Provider>
+    </Provider>
   );
 }
